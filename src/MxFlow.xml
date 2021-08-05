@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="agileworks.mxflow.MxFlow" pluginWidget="true" needsEntityContext="true" offlineCapable="true"
+        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
+    <name>MxFlow</name>
+    <description>Mendix Flow</description>
+    <icon/>
+    <properties>
+        <propertyGroup caption="Storage and Display">
+            <property key="jsonDataSource" type="attribute">
+                <caption>JSON DataSource</caption>
+                <description>A string field with unlimited length for me to put my graph</description>
+                <attributeTypes>
+                    <attributeType name="String"/>
+                </attributeTypes>
+            </property>
+            <property key="sourceId" type="attribute">
+                <caption>SourceId</caption>
+                <description>When a new edge is created, this will be the source</description>
+                <attributeTypes>
+                    <attributeType name="Integer"/>
+                    <attributeType name="Long"/>
+                    <attributeType name="AutoNumber"/>
+                </attributeTypes>
+            </property>
+            <property key="targetId" type="attribute">
+                <caption>TargetId</caption>
+                <description>When a new edge is created, this will be the source</description>
+                <attributeTypes>
+                    <attributeType name="Long"/>
+                    <attributeType name="AutoNumber"/>
+                </attributeTypes>
+            </property>
+            <property key="triggeredForGuid" type="attribute">
+                <caption>Triggered for GUID</caption>
+                <description>When a node or edge is clicked, use this field to detect which entity it was...</description>
+                <attributeTypes>
+                    <attributeType name="String"/>
+                </attributeTypes>
+            </property>
+            <property key="height" type="integer" defaultValue="500">
+                <caption>Height in Pixels</caption>
+                <description>Height in pixels</description>
+            </property>
+        </propertyGroup>
+        <propertyGroup caption="Data Source">
+            <propertyGroup caption="Node">
+                <property key="nodes" type="datasource" isList="true">
+                    <caption>Nodes</caption>
+                    <description>Give me all your nodes</description>
+                </property>
+                <property key="nodeLabel" type="attribute" dataSource="nodes">
+                    <caption>Node Label</caption>
+                    <description>Label used for nodes</description>
+                    <attributeTypes>
+                        <attributeType name="String"/>
+                    </attributeTypes>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Edge">
+                <property key="edges" type="datasource" isList="true">
+                    <caption>Edges</caption>
+                    <description>Give me all your edges</description>
+                </property>
+                <property key="edgeLabel" type="attribute" dataSource="edges">
+                    <caption>Edge Label</caption>
+                    <description>Label used for edges</description>
+                    <attributeTypes>
+                        <attributeType name="String"/>
+                    </attributeTypes>
+                </property>
+                <property key="source" type="attribute" dataSource="edges">
+                    <caption>Source</caption>
+                    <description>When a connection is made, this field will be updated with the Source Id, use it to create a connection yourself</description>
+                    <attributeTypes>
+                        <attributeType name="Long"/>
+                        <attributeType name="AutoNumber"/>
+                    </attributeTypes>
+                </property>
+                <property key="target" type="attribute" dataSource="edges">
+                    <caption>Target</caption>
+                    <description>When a connection is made, this field will be updated with the Target Id, use it to create a connection yourself</description>
+                    <attributeTypes>
+                        <attributeType name="AutoNumber"/>
+                        <attributeType name="Long"/>
+                    </attributeTypes>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="IDs">
+                <property key="nodeId" type="attribute" dataSource="nodes">
+                    <caption>Node Id Attr</caption>
+                    <description>Tells widget which attribute to use as Id for nodes</description>
+                    <attributeTypes>
+                        <attributeType name="AutoNumber"/>
+                        <attributeType name="Long"/>
+                    </attributeTypes>
+                </property>
+                <property key="edgeId" type="attribute" dataSource="edges">
+                    <caption>Edge Id Attr</caption>
+                    <description>Tells widget which attribute to use as Id for edges</description>
+                    <attributeTypes>
+                        <attributeType name="AutoNumber"/>
+                        <attributeType name="Long"/>
+                    </attributeTypes>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Clicking">
+            <propertyGroup caption="Node">
+                <property key="onNodeDoubleClick" type="action">
+                    <caption>Node Double Click</caption>
+                    <description>Node Double Click</description>
+                </property>
+                <property key="nodeClicked" type="attribute">
+                    <caption>NodeId</caption>
+                    <description>When a node is double clicked this attribute will have it's id</description>
+                    <attributeTypes>
+                        <attributeType name="Long"/>
+                        <attributeType name="AutoNumber"/>
+                    </attributeTypes>
+                </property>
+            </propertyGroup>
+
+            <propertyGroup caption="Edge">
+                <property key="onEdgeClick" type="action">
+                    <caption>Edge Click</caption>
+                    <description>onEdgeClick</description>
+                </property>
+                <property key="onEdgeAdded" type="action">
+                    <caption>Edge Added</caption>
+                    <description>onEdgeAdded</description>
+                </property>
+                <property key="edgeClicked" type="attribute">
+                    <caption>EdgeId</caption>
+                    <description>When a edge is double clicked this attribute will have it's id</description>
+                    <attributeTypes>
+                        <attributeType name="Long"/>
+                        <attributeType name="AutoNumber"/>
+                    </attributeTypes>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Settings">
+            <property key="minimap" type="boolean" defaultValue="true">
+                <caption>Show Minimap</caption>
+                <description>Displays a minimap of the canvas</description>
+            </property>
+            <property key="controls" type="boolean" defaultValue="true">
+                <caption>Show Controls</caption>
+                <description>Zoom and lock controls</description>
+            </property>
+            <property key="backgroundColor" type="string" defaultValue="#aaa">
+                <caption>Background Color</caption>
+                <description>Background color in #333</description>
+            </property>
+            <property key="gap" type="integer" defaultValue="12">
+                <caption>Background gap</caption>
+                <description>Background grid gap in pixels</description>
+            </property>
+        </propertyGroup>
+        <propertyGroup caption="Element Styles">
+            <property key="nodeClassName" type="attribute" dataSource="nodes" required="false">
+                <caption>Node Class Name</caption>
+                <description>Custom className for nodes</description>
+                <attributeTypes>
+                    <attributeType name="String"/>
+                </attributeTypes>
+            </property>
+            <property key="edgeClassName" type="attribute" dataSource="edges" required="false">
+                <caption>Edge Class Name</caption>
+                <description>Custom className for edges</description>
+                <attributeTypes>
+                    <attributeType name="String"/>
+                </attributeTypes>
+            </property>
+        </propertyGroup>
+    </properties>
+</widget>

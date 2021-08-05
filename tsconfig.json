@@ -1,0 +1,13 @@
+{
+  "extends": "./node_modules/@mendix/pluggable-widgets-tools/configs/tsconfig.base.json",
+  "files": [
+    "typings/index.d.ts"
+  ],
+  "compilerOptions": {
+    "jsx": "react",
+    "target": "es6",
+    "module": "commonjs",
+    "lib": ["es6", "dom"],
+    "jsxFactory": "React.createElement"
+  }
+}
